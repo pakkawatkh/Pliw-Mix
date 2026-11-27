@@ -126,14 +126,13 @@ public final class StatusBarController: NSObject, NSPopoverDelegate {
 
     private func updateButtonAppearance(activeTapCount: Int) {
         guard let button = statusItem.button else { return }
-        let symbolName = activeTapCount > 0 ? "slider.horizontal.3" : "speaker.wave.2"
         let config = NSImage.SymbolConfiguration(pointSize: 13.5, weight: .semibold)
-        let img = NSImage(systemSymbolName: symbolName, accessibilityDescription: "Pliw Mix")?
+        let img = NSImage(systemSymbolName: "speaker.wave.2", accessibilityDescription: "Pliw Mix")?
             .withSymbolConfiguration(config)
         img?.isTemplate = true
         button.image = img
-        button.imagePosition = activeTapCount > 0 ? .imageLeading : .imageOnly
-        button.title = activeTapCount > 0 ? " \(activeTapCount)" : ""
+        button.imagePosition = .imageOnly
+        button.title = ""
         button.toolTip = activeTapCount > 0
             ? "Pliw Mix — Controlling \(activeTapCount) \(activeTapCount == 1 ? "app" : "apps")"
             : "Pliw Mix — Per-App Audio Mixer"
