@@ -72,7 +72,11 @@ public struct MixerPopoverView: View {
                 RoundedRectangle(cornerRadius: 8, style: .continuous)
                     .fill(
                         LinearGradient(
-                            colors: [Color.accentColor, Color.cyan.opacity(0.85)],
+                            colors: [
+                                Color(red: 0xFB / 255.0, green: 0x92 / 255.0, blue: 0x3C / 255.0),
+                                Color(red: 0xF9 / 255.0, green: 0x73 / 255.0, blue: 0x16 / 255.0),
+                                Color(red: 0xE1 / 255.0, green: 0x1D / 255.0, blue: 0x48 / 255.0)
+                            ],
                             startPoint: .topLeading,
                             endPoint: .bottomTrailing
                         )

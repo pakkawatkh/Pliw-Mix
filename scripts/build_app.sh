@@ -28,6 +28,10 @@ cp "${RELEASE_BIN}" "${MACOS_DIR}/pliw-mix"
 strip "${MACOS_DIR}/pliw-mix"
 chmod +x "${MACOS_DIR}/pliw-mix"
 
+if [ -f "${PROJECT_DIR}/Resources/AppIcon.icns" ]; then
+    cp "${PROJECT_DIR}/Resources/AppIcon.icns" "${RESOURCES_DIR}/AppIcon.icns"
+fi
+
 cat << 'EOF' > "${CONTENTS_DIR}/Info.plist"
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
@@ -35,6 +39,8 @@ cat << 'EOF' > "${CONTENTS_DIR}/Info.plist"
 <dict>
     <key>CFBundleExecutable</key>
     <string>pliw-mix</string>
+    <key>CFBundleIconFile</key>
+    <string>AppIcon</string>
     <key>CFBundleIdentifier</key>
     <string>com.local.pliw-mix</string>
     <key>CFBundleName</key>
@@ -78,6 +84,8 @@ if [ -z "${SKIP_INSTALL}" ]; then
     pkill -9 -x "pliw-mix" || true
     rm -rf "/Applications/Pliw Mix.app"
     cp -R "${APP_DIR}" "/Applications/Pliw Mix.app"
+    touch "/Applications/Pliw Mix.app"
+    /System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -f "/Applications/Pliw Mix.app" >/dev/null 2>&1 || true
     echo "🎉 Updated /Applications/Pliw Mix.app"
 else
     echo "⏭️ Skipping install to /Applications because SKIP_INSTALL is set."
